@@ -19,3 +19,21 @@ def ints2(count: Int)(rng: RNG): (List[Int], RNG) = {
     }
   go(count, rng, List())
 }
+
+// Using Stream
+def ints(count: Int)(rng: RNG): (List[Int], RNG) = {
+	val newVals = Stream.unfold(rng){
+		//f: S => Option[(A, S)]
+		initGen => {
+			val generated = initGen.nextInt
+			Option.map2(Some(generated), Some(generated._2))((_, _))
+		}
+	}	
+	val genStream = newVals take(count)
+	genStream.foldRight(List[Int](), rng){
+		case((curInt, curRng), (nlist, prevRng)) => {
+			((curInt :: nlist),  curRng)
+		}
+	
+	}
+}
