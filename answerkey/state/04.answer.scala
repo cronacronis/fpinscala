@@ -21,7 +21,7 @@ def ints2(count: Int)(rng: RNG): (List[Int], RNG) = {
 }
 
 // Using Stream
-def ints(count: Int)(rng: RNG): (List[Int], RNG) = {
+def ints3(count: Int)(rng: RNG): (List[Int], RNG) = {
 	val newVals = Stream.unfold(rng){
 		//f: S => Option[(A, S)]
 		initGen => {
